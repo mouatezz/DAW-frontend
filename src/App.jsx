@@ -10,13 +10,15 @@ import ApplicationManagement from './Teacher/ApplicationManagement';
 import StudentExplorer from './Teacher/StudentExplorer'; // Make sure this path is correct
 import Messages from './Teacher/Messages';
 import Profile from './Teacher/Profile';
+import LandingPage from './LandingPage';
 
 const App = () => {
   return (
     <Router>
       <div className="min-h-screen bg-gray-50">
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path='/' element={<LandingPage/>} />
+          <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
           

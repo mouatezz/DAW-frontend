@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from '/src/assets/logo.png';
 
 const Sidebar = ({ activeSection, setActiveSection }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -24,9 +25,28 @@ const Sidebar = ({ activeSection, setActiveSection }) => {
   return (
     <div
       className={`flex flex-col transition-all duration-300 ${
-        isOpen ? 'w-48' : 'w-14'
+        isOpen ? 'w-60' : 'w-20'
       } bg-gray-200 min-h-screen text-gray-700`}
     >
+      {/* Logo Section */}
+      <div
+        className={`flex items-center justify-center p-4 transition-all duration-300 ${
+          isOpen ? 'h-36' : 'h-20'
+        }`}
+      >
+        <img
+          src={logo}
+          alt="Logo"
+          className={`transition-all duration-300 object-contain ${
+            isOpen ? 'h-32' : 'h-16'
+          }`}
+          style={{
+            minHeight: '4rem',
+            minWidth: isOpen ? 'auto' : '4rem',
+          }}
+        />
+      </div>
+
       {/* Toggle Button */}
       <div className="flex items-center justify-center p-4">
         <button

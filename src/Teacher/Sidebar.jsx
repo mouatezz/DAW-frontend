@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import logo from '/src/assets/logo.png'; // Adjust the path as necessary
 
 const Sidebar = ({ activeSection, setActiveSection }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -18,8 +19,29 @@ const Sidebar = ({ activeSection, setActiveSection }) => {
 
   return (
     <div
-      className={`flex flex-col transition-all duration-300 ${isOpen ? 'w-48' : 'w-14'} bg-gray-200 min-h-screen text-gray-700`}
+      className={`flex flex-col transition-all duration-300 ${
+        isOpen ? 'w-60' : 'w-20' // Slightly smaller width when open
+      } bg-gray-200 min-h-screen text-gray-700`}
     >
+      {/* Logo Section */}
+      <div
+        className={`flex items-center justify-center p-4 transition-all duration-300 ${
+          isOpen ? 'h-36' : 'h-20'
+        }`}
+      >
+        <img
+          src={logo}
+          alt="Logo"
+          className={`transition-all duration-300 object-contain ${
+            isOpen ? 'h-32' : 'h-16'
+          }`}
+          style={{
+            minHeight: '4rem',
+            minWidth: isOpen ? 'auto' : '4rem',
+          }}
+        />
+      </div>
+
       {/* Toggle Button */}
       <div className="flex items-center justify-center p-4">
         <button
@@ -36,17 +58,18 @@ const Sidebar = ({ activeSection, setActiveSection }) => {
         {menuItems.map((item) => (
           <button
             key={item.section}
-            className={`flex items-center w-full p-2 text-sm rounded-lg transition-all duration-300 ${
+            className={`flex items-center w-full p-3 text-base rounded-lg transition-all duration-300 ${
               activeSection === item.section
                 ? 'bg-blue-600 text-white'
                 : 'hover:bg-blue-100 hover:text-blue-600'
             }`}
-            onClick={() => {
-              setActiveSection(item.section); // Update active section on click
-              if (!isOpen) toggleSidebar(); // Close the sidebar if collapsed
-            }}
+            onClick={() => setActiveSection(item.section)}
           >
-            <div className={`flex items-center justify-center w-full ${isOpen ? 'text-left' : 'text-center'}`}>
+            <div
+              className={`flex items-center justify-center w-full ${
+                isOpen ? 'text-left' : 'text-center'
+              }`}
+            >
               <span className="text-2xl">{item.icon}</span>
               {isOpen && <span className="ml-3">{item.name}</span>}
             </div>
@@ -62,7 +85,6 @@ const Sidebar = ({ activeSection, setActiveSection }) => {
             isOpen ? 'justify-start' : 'justify-center'
           }`}
           onClick={() => {
-            // Handle logout logic
             console.log('Logout clicked!');
           }}
         >
