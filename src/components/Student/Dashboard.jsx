@@ -3,30 +3,36 @@ import React from 'react';
 const StatCard = ({ title, value, type }) => {
   const typeStyles = {
     total: {
-      bg: 'bg-blue-50',
-      text: 'text-blue-600',
+      bg: 'bg-blue-100',
+      text: 'text-blue-700',
+      border: 'border-blue-300',
     },
     pending: {
-      bg: 'bg-yellow-50',
-      text: 'text-yellow-600',
+      bg: 'bg-yellow-100',
+      text: 'text-yellow-700',
+      border: 'border-yellow-300',
     },
     accepted: {
-      bg: 'bg-green-50',
-      text: 'text-green-600',
+      bg: 'bg-green-100',
+      text: 'text-green-700',
+      border: 'border-green-300',
     },
     rejected: {
-      bg: 'bg-red-50',
-      text: 'text-red-600',
+      bg: 'bg-red-100',
+      text: 'text-red-700',
+      border: 'border-red-300',
     },
   };
 
-  const { bg, text } = typeStyles[type] || {};
+  const { bg, text, border } = typeStyles[type] || {};
 
   return (
-    <div className={`p-6 rounded-lg shadow-lg ${bg} flex items-center justify-between`}>
+    <div
+      className={`p-6 rounded-lg shadow-md ${bg} ${border} border-t-4 transition-all hover:shadow-lg`}
+    >
       <div>
-        <h3 className="text-gray-700 font-medium">{title}</h3>
-        <p className={`text-3xl font-semibold mt-2 ${text}`}>{value}</p>
+        <h3 className="text-gray-800 font-medium">{title}</h3>
+        <p className={`text-3xl font-bold mt-2 ${text}`}>{value}</p>
       </div>
     </div>
   );
@@ -34,9 +40,9 @@ const StatCard = ({ title, value, type }) => {
 
 const NotificationItem = ({ notification }) => {
   return (
-    <div className="p-4 mb-4 rounded-lg border-l-4 border-blue-500 bg-gray-50 hover:bg-gray-100 cursor-pointer">
+    <div className="p-4 mb-4 rounded-lg border-l-4 border-blue-500 bg-blue-50 hover:bg-blue-100 transition-all shadow-sm hover:shadow-md">
       <p className="text-gray-800 font-medium">{notification.message}</p>
-      <span className="text-gray-500 text-sm block mt-1">
+      <span className="text-gray-600 text-sm block mt-1">
         {new Date(notification.timestamp).toLocaleString()}
       </span>
     </div>
@@ -79,11 +85,11 @@ const Dashboard = ({
   ];
 
   return (
-    <div className="mt-16 p-6 bg-white rounded-lg shadow-md">
+    <div className="mt-16 p-8 bg-gradient-to-r from-blue-50 via-white to-blue-50 rounded-xl shadow-xl">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-blue-600">Dashboard</h1>
+        <h1 className="text-3xl font-extrabold text-blue-700">Student Dashboard</h1>
         <button
-          className="px-5 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-500 disabled:bg-gray-400"
+          className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-500 transition-all disabled:bg-gray-400"
           onClick={refreshData}
           disabled={isLoading}
         >
@@ -103,7 +109,7 @@ const Dashboard = ({
 
           <div className="mt-8">
             <div className="mb-4">
-              <h2 className="text-2xl font-semibold text-blue-600">Recent Activity</h2>
+              <h2 className="text-2xl font-semibold text-blue-700">Recent Activity</h2>
               {notifications.length === 0 && (
                 <p className="text-gray-500">No recent activity to display</p>
               )}
