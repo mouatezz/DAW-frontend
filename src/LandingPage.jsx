@@ -47,7 +47,7 @@ const LandingPage = () => {
                 className="h-20 w-20 object-contain"
               />
               <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">
-                Master Thesis Hub
+                DZTUDIANT education
               </span>
             </div>
             <div className="flex items-center space-x-6">

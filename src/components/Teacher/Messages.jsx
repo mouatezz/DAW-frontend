@@ -26,18 +26,20 @@ const Messages = () => {
     },
   ]);
 
-  // State to hold the new message input
   const [newMessage, setNewMessage] = useState('');
+  const [selectedRecipient, setSelectedRecipient] = useState('');
+
+  const recipients = ['Admin', 'John Doe', 'Jane Smith']; // List of potential recipients
 
   // Function to send a new message
   const sendMessage = () => {
-    if (newMessage.trim()) {
+    if (newMessage.trim() && selectedRecipient) {
       setMessages([
         ...messages,
         {
           id: messages.length + 1,
-          from: 'You',
-          to: 'Professor Bouramoul', // You can replace this with the recipient dynamically
+          from: 'Professor Bouramoul',
+          to: selectedRecipient,
           message: newMessage,
           timestamp: new Date().toLocaleString(),
         },
@@ -55,13 +57,39 @@ const Messages = () => {
         {messages.map((message) => (
           <div
             key={message.id}
-            className="bg-white p-4 rounded-lg shadow-md border border-blue-200"
+            className={`p-4 rounded-lg shadow-md border ${
+              message.from === 'Professor Bouramoul' ? 'bg-blue-100' : 'bg-white'
+            }`}
           >
             <p className="text-sm text-gray-500">{message.timestamp}</p>
-            <p className="font-semibold text-blue-700">{message.from} to {message.to}</p>
+            <p className="font-semibold text-blue-700">
+              {message.from} to {message.to}
+            </p>
             <p className="text-gray-700">{message.message}</p>
           </div>
         ))}
+      </div>
+
+      {/* Recipient Selection */}
+      <div className="mb-4">
+        <label htmlFor="recipient" className="block text-sm font-medium text-gray-700">
+          Select Recipient
+        </label>
+        <select
+          id="recipient"
+          value={selectedRecipient}
+          onChange={(e) => setSelectedRecipient(e.target.value)}
+          className="w-full mt-2 p-3 border rounded-lg bg-gray-100 text-gray-700"
+        >
+          <option value="" disabled>
+            Choose a recipient
+          </option>
+          {recipients.map((recipient, index) => (
+            <option key={index} value={recipient}>
+              {recipient}
+            </option>
+          ))}
+        </select>
       </div>
 
       {/* Message Input and Send Button */}
@@ -75,7 +103,12 @@ const Messages = () => {
         />
         <button
           onClick={sendMessage}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+          disabled={!newMessage.trim() || !selectedRecipient}
+          className={`px-4 py-2 rounded-lg transition ${
+            !newMessage.trim() || !selectedRecipient
+              ? 'bg-gray-400 cursor-not-allowed'
+              : 'bg-blue-600 text-white hover:bg-blue-700'
+          }`}
         >
           Send Message
         </button>
