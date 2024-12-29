@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import ForgotPassword from './components/auth/ForgotPassword';
-import TeacherDashboard from './Teacher/TeacherDashboard';
-import StudentDashboard from './Student/StudentDashboard';
-import ProjectManagement from './Teacher/ProjectManagement';
-import ApplicationManagement from './Teacher/ApplicationManagement';
-import StudentExplorer from './Teacher/StudentExplorer'; // Make sure this path is correct
-import Messages from './Teacher/Messages';
-import Profile from './Teacher/Profile';
+import TeacherDashboard from './components/Teacher/TeacherDashboard';
+import StudentDashboard from './components/Student/StudentDashboard';
+import ProjectManagement from './components/Teacher/ProjectManagement';
+import ApplicationManagement from './components/Teacher/ApplicationManagement';
+import StudentExplorer from './components/Teacher/StudentExplorer'; // Make sure this path is correct
+import Messages from './components/Teacher/Messages';
+import Profile from './components/Teacher/Profile';
 import LandingPage from './LandingPage';
 
 const App = () => {
