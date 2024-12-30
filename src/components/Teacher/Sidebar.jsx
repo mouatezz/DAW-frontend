@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import logo from '/src/assets/logo.png'; // Adjust the path as necessary
 
 const Sidebar = ({ activeSection, setActiveSection }) => {
   const [isOpen, setIsOpen] = useState(true);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -86,6 +88,7 @@ const Sidebar = ({ activeSection, setActiveSection }) => {
           }`}
           onClick={() => {
             console.log('Logout clicked!');
+            navigate('/Login'); // Navigate to Login page
           }}
         >
           <span className="text-2xl">⎋</span>

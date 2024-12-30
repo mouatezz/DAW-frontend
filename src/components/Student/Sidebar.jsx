@@ -7,7 +7,7 @@ const Sidebar = ({ activeSection, setActiveSection }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    navigate('/');
+    navigate('/Login');
   };
 
   const toggleSidebar = () => {
