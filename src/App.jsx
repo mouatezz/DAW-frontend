@@ -11,20 +11,21 @@ import StudentExplorer from './components/Teacher/StudentExplorer'; // Make sure
 import Messages from './components/Teacher/Messages';
 import Profile from './components/Teacher/Profile';
 import LandingPage from './LandingPage';
+import AdminLayout from './components/admin/AdminLayout';
 
 const App = () => {
   return (
     <Router>
       <div className="min-h-screen bg-gray-50">
         <Routes>
-          <Route path='/' element={<LandingPage/>} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
-          
+          <Route path="/AdminLayout" element={<AdminLayout />} />
           {/* Teacher Dashboard and nested routes */}
           <Route path="/TeacherDashboard/*" element={<TeacherDashboard />}>
-            <Route path="studentExplorer" element={<StudentExplorer />} /> {/* Add this route */}
+            <Route path="studentExplorer" element={<StudentExplorer />} />
             <Route path="projectManagement" element={<ProjectManagement />} />
             <Route path="applicationManagement" element={<ApplicationManagement />} />
             <Route path="messages" element={<Messages />} />

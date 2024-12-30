@@ -37,7 +37,7 @@ const LoginPage = () => {
 
       switch (formData.userType) {
         case "admin":
-          navigate("/AdminDashboard");
+          navigate("/AdminLayout");
           break;
         case "teacher":
           navigate("/TeacherDashboard");
