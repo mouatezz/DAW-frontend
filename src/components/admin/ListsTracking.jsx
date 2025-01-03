@@ -41,11 +41,8 @@ const ListsTracking = () => {
 
   const tabs = [
     { id: 'projects', label: 'Projects', icon: '📋' },
-    { id: 'students', label: 'Students', icon: '👥' },
-    { id: 'teachers', label: 'Teachers', icon: '👨‍🏫' },
     { id: 'applications', label: 'Applications', icon: '📝' },
-    { id: 'groups', label: 'Groups', icon: '🤝' },
-    { id: 'supervision', label: 'Supervision', icon: '👀' },
+    { id: 'groups', label: 'Groups', icon: '🤝' }
   ];
 
   // Core Functions
@@ -337,8 +334,6 @@ const ListsTracking = () => {
             </div>
           </div>
         );
-
-      // Add other cases as needed...
 
       default:
         return <div>Invalid Tab</div>;

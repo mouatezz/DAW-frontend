@@ -35,31 +35,31 @@ const LandingPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100">
       {/* Navigation */}
-      <nav className="fixed w-full bg-white/90 backdrop-blur-md border-b z-50 shadow-sm">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-24">
-            <div className="flex items-center space-x-5">
+      <nav className="fixed w-full bg-white/90 backdrop-blur-md border-b z-50 shadow-sm transition-all duration-300 ease-in-out">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20">
+            <div className="flex items-center space-x-4">
               <img 
                 src="/src/assets/logo.png" 
                 alt="Logo" 
-                className="h-20 w-20 object-contain"
+                className="h-12 w-12 object-contain"
               />
-              <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">
+              <span className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">
                 DZTUDIANT education
               </span>
             </div>
-            <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-4">
               <button 
                 onClick={() => navigate('/login')}
-                className="px-6 py-3 text-blue-600 hover:text-blue-800 transition-colors font-medium text-lg"
+                className="px-4 py-2 text-blue-600 hover:text-blue-800 transition-colors font-medium text-sm sm:text-base"
               >
                 Sign In
               </button>
               <button 
                 onClick={() => navigate('/register')}
-                className="px-8 py-3 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-all font-medium text-lg shadow-sm hover:shadow-md hover:scale-105 duration-300"
+                className="px-4 sm:px-6 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-all font-medium text-sm sm:text-base shadow-sm hover:shadow-md hover:scale-105 duration-300"
               >
                 Get Started
               </button>
@@ -69,23 +69,23 @@ const LandingPage = () => {
       </nav>
 
       {/* Hero Section */}
-      <div className="relative pt-44 pb-24 px-4">
+      <div className="relative pt-32 pb-16 sm:pt-40 sm:pb-24 px-4 sm:px-6 lg:px-8">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,theme(colors.blue.50),transparent_70%)] opacity-70"></div>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,theme(colors.blue.50),transparent_70%)] opacity-40"></div>
-        <div className="relative max-w-6xl mx-auto text-center">
+        <div className="relative max-w-5xl mx-auto text-center">
           <div className="animate-fade-in">
-            <h1 className="text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 mb-8 leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 mb-6 leading-tight">
               Transform Your Academic Journey
             </h1>
-            <p className="text-2xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed font-medium">
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed font-medium">
               Connect with professors, discover groundbreaking research opportunities, and take control of your Master's thesis project at Constantine 2 University.
             </p>
             <button 
               onClick={() => navigate('/register')}
-              className="group px-10 py-5 text-xl font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center mx-auto"
+              className="group px-6 sm:px-8 py-3 sm:py-4 text-lg sm:text-xl font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center mx-auto"
             >
               Begin Your Journey
-              <svg className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </button>
@@ -94,17 +94,17 @@ const LandingPage = () => {
       </div>
 
       {/* Features Section */}
-      <div className="max-w-[1400px] mx-auto px-6 py-24">
-        <div className="grid md:grid-cols-3 gap-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <div className="grid md:grid-cols-3 gap-8 sm:gap-10">
           {features.map((feature, index) => (
-            <div key={index} className="group p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-blue-100">
-              <div className="mb-6 p-4 bg-blue-50 rounded-xl w-fit group-hover:bg-blue-100 transition-colors">
+            <div key={index} className="group p-6 sm:p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-blue-100">
+              <div className="mb-6 p-3 sm:p-4 bg-blue-50 rounded-xl w-fit group-hover:bg-blue-100 transition-colors">
                 {feature.icon}
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
                 {feature.title}
               </h3>
-              <p className="text-gray-600 leading-relaxed text-lg">
+              <p className="text-gray-600 leading-relaxed text-base sm:text-lg">
                 {feature.description}
               </p>
             </div>
@@ -113,19 +113,19 @@ const LandingPage = () => {
       </div>
 
       {/* Stats Section */}
-      <div className="bg-gradient-to-b from-white to-blue-50 py-24">
-        <div className="max-w-[1400px] mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-16 text-center">
+      <div className="bg-gradient-to-b from-white to-blue-50 py-16 sm:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-3 gap-8 sm:gap-16 text-center">
             {[
               { number: "500+", label: "Active Projects" },
               { number: "2000+", label: "Students Enrolled" },
               { number: "98%", label: "Success Rate" },
             ].map((stat, index) => (
-              <div key={index} className="p-8 bg-white/50 rounded-2xl backdrop-blur-sm">
-                <div className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800 mb-4">
+              <div key={index} className="p-6 sm:p-8 bg-white/50 rounded-2xl backdrop-blur-sm hover:shadow-lg transition-all duration-300">
+                <div className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800 mb-3">
                   {stat.number}
                 </div>
-                <div className="text-xl text-gray-600 font-medium">
+                <div className="text-lg sm:text-xl text-gray-600 font-medium">
                   {stat.label}
                 </div>
               </div>
@@ -136,15 +136,15 @@ const LandingPage = () => {
 
       {/* Footer */}
       <footer className="bg-gradient-to-b from-gray-900 to-gray-800 text-white">
-        <div className="max-w-[1400px] mx-auto px-6 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
           <div className="text-center">
-            <h2 className="text-3xl font-bold mb-4">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">
               Constantine 2 University – Abdelhamid Mehri
             </h2>
-            <p className="text-gray-300 text-xl">
+            <p className="text-gray-300 text-lg sm:text-xl">
               Faculty of New Information and Communication Technologies
             </p>
-            <div className="mt-10 text-sm text-gray-400">
+            <div className="mt-8 sm:mt-10 text-sm text-gray-400">
               © {new Date().getFullYear()} All rights reserved
             </div>
           </div>
@@ -155,3 +155,4 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
+

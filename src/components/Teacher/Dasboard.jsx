@@ -55,9 +55,6 @@ const Dashboard = () => {
           You have <span className="font-semibold text-blue-600">5 ongoing projects</span> and{' '}
           <span className="font-semibold text-blue-600">2 completed projects</span>.
         </p>
-        <button className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 shadow-md transition-all">
-          View Projects
-        </button>
       </div>
     </div>
   );

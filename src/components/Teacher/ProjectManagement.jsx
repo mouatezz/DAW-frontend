@@ -121,31 +121,6 @@ const TeacherProjectManagement = () => {
             </select>
           </div>
 
-          <div>
-            <label className="block text-gray-700 mb-2">Supervisor</label>
-            <input
-              type="text"
-              name="supervisor"
-              value={formData.supervisor}
-              onChange={handleInputChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-gray-700 mb-2">Max Team Size</label>
-            <input
-              type="number"
-              name="maxTeamSize"
-              value={formData.maxTeamSize}
-              onChange={handleInputChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-              min="1"
-            />
-          </div>
-
           <div className="md:col-span-2">
             <label className="block text-gray-700 mb-2">Keywords (comma-separated)</label>
             <input
@@ -188,8 +163,6 @@ const TeacherProjectManagement = () => {
             <p className="text-gray-700 mb-4">{project.description}</p>
             <div className="text-sm text-gray-500 mb-4">
               <p><strong>Domain:</strong> {project.domain}</p>
-              <p><strong>Supervisor:</strong> {project.supervisor}</p>
-              <p><strong>Max Team Size:</strong> {project.maxTeamSize}</p>
             </div>
             <div className="flex flex-wrap gap-2 mb-4">
               {project.keywords.map((keyword, index) => (

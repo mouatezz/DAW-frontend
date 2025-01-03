@@ -34,15 +34,6 @@ const Applications = ({ applications = [] }) => {
     <div className="p-8 bg-gradient-to-b from-gray-50 to-white shadow-lg rounded-xl">
       <h2 className="text-4xl font-extrabold text-blue-600 mb-8 text-center">Applications</h2>
 
-      <div className="text-center mb-8">
-        <button
-          onClick={toggleTeamModal}
-          className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-        >
-          Form a Team
-        </button>
-      </div>
-
       {applications.length === 0 ? (
         <p className="text-center text-gray-500">No applications submitted yet.</p>
       ) : (
