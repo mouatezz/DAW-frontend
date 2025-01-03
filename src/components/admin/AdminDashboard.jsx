@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AdminDashboard = () => {
+const AdminDashboard = ({ setActiveSection }) => {
   const dashboardStats = [
     { title: 'Active Projects', count: 24, description: 'Currently ongoing' },
     { title: 'Total Users', count: 156, description: 'Students & Teachers' },
@@ -59,9 +59,6 @@ const AdminDashboard = () => {
           You have <span className="font-semibold text-blue-600">24 active projects</span> and{' '}
           <span className="font-semibold text-blue-600">12 pending requests</span> to review.
         </p>
-        <button className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 shadow-md transition-all">
-          View All Projects
-        </button>
       </div>
     </div>
   );

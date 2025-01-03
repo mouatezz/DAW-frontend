@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Communication = () => {
   // Sample data structure expected from backend
@@ -24,6 +24,22 @@ const Communication = () => {
       fullMessage: 'We need to discuss the upcoming project phases and coordinate with other teachers. Can we schedule a quick meeting?'
     }
   ];
+
+  const [announcement, setAnnouncement] = useState('');
+
+  const handleAnnouncementChange = (e) => {
+    setAnnouncement(e.target.value);
+  };
+
+  const sendAnnouncement = () => {
+    if (announcement.trim() === '') {
+      return;
+    }
+
+    // Simulate sending the announcement to backend
+    console.log('Announcement to backend:', announcement);
+    setAnnouncement('');
+  };
 
   return (
     <div className="p-8 bg-gradient-to-r from-blue-50 via-white to-blue-50 min-h-screen">
@@ -108,6 +124,24 @@ const Communication = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Global Notification Section */}
+        <div className="p-6 border-t border-gray-100">
+          <h3 className="text-xl font-bold text-blue-700 mb-4">Send Global Notification</h3>
+          <textarea
+            value={announcement}
+            onChange={handleAnnouncementChange}
+            placeholder="Type your announcement here..."
+            className="w-full p-3 border rounded-lg mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            rows="4"
+          />
+          <button 
+            onClick={sendAnnouncement}
+            className="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 shadow-md transition-all"
+          >
+            Send Announcement
+          </button>
         </div>
       </div>
     </div>

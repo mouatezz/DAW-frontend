@@ -1,224 +1,222 @@
 import React, { useState } from 'react';
 
-const ProjectManagement = () => {
+const TeacherProjectManagement = () => {
+  // State for managing projects
   const [projects, setProjects] = useState([
     {
       id: 1,
-      title: 'Web Development with React',
-      description: 'Build a responsive web application using React and Material UI.',
-      keywords: ['React', 'Frontend', 'JavaScript'],
+      title: 'AI-Powered Image Recognition',
+      description: 'Develop an AI system for image recognition using deep learning',
+      domain: 'Artificial Intelligence',
+      keywords: ['AI', 'Deep Learning', 'Computer Vision'],
       status: 'Open',
-    },
-    {
-      id: 2,
-      title: 'Data Analysis with Python',
-      description: 'Perform data analysis using Pandas and Matplotlib.',
-      keywords: ['Python', 'Data Science', 'Pandas'],
-      status: 'In Progress',
+      supervisor: 'Dr. Johnson',
+      maxTeamSize: 3
     },
   ]);
 
-  const [newProject, setNewProject] = useState({
+  // State for managing the form
+  const [formData, setFormData] = useState({
     title: '',
     description: '',
+    domain: '',
     keywords: '',
-    status: 'Open',
+    supervisor: '',
+    maxTeamSize: '',
   });
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [editingProjectId, setEditingProjectId] = useState(null);
+  // State for tracking editing mode
+  const [editingId, setEditingId] = useState(null);
+
+  // Available domains matching the student view
+  const domains = [
+    'Artificial Intelligence',
+    'Web Development',
+    'Data Science'
+  ];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewProject((prev) => ({
+    setFormData(prev => ({
       ...prev,
-      [name]: value,
+      [name]: value
     }));
   };
 
-  const handleAddProject = () => {
-    if (!newProject.title || !newProject.description) {
-      alert('Please fill in all fields!');
-      return;
-    }
-    setProjects((prev) => [
-      ...prev,
-      {
-        id: prev.length + 1,
-        ...newProject,
-        keywords: newProject.keywords.split(',').map((kw) => kw.trim()),
-      },
-    ]);
-    setNewProject({ title: '', description: '', keywords: '', status: 'Open' });
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    const newProject = {
+      id: editingId || Date.now(),
+      ...formData,
+      keywords: formData.keywords.split(',').map(k => k.trim()),
+      status: 'Open'
+    };
 
-  const handleEditProject = (id) => {
-    const project = projects.find((p) => p.id === id);
-    setNewProject({
-      title: project.title,
-      description: project.description,
-      keywords: project.keywords.join(', '),
-      status: project.status,
+    if (editingId) {
+      setProjects(projects.map(p => p.id === editingId ? newProject : p));
+      setEditingId(null);
+    } else {
+      setProjects([...projects, newProject]);
+    }
+
+    setFormData({
+      title: '',
+      description: '',
+      domain: '',
+      keywords: '',
+      supervisor: '',
+      maxTeamSize: '',
     });
-    setEditingProjectId(id);
-    setIsEditing(true);
   };
 
-  const handleSaveEdit = () => {
-    setProjects((prev) =>
-      prev.map((project) =>
-        project.id === editingProjectId
-          ? {
-              ...project,
-              ...newProject,
-              keywords: newProject.keywords.split(',').map((kw) => kw.trim()),
-            }
-          : project
-      )
-    );
-    setIsEditing(false);
-    setEditingProjectId(null);
-    setNewProject({ title: '', description: '', keywords: '', status: 'Open' });
+  const handleEdit = (project) => {
+    setEditingId(project.id);
+    setFormData({
+      ...project,
+      keywords: project.keywords.join(', ')
+    });
   };
 
-  const handleDeleteProject = (id) => {
-    if (window.confirm('Are you sure you want to delete this project?')) {
-      setProjects((prev) => prev.filter((project) => project.id !== id));
-    }
+  const handleDelete = (id) => {
+    setProjects(projects.filter(p => p.id !== id));
   };
 
   return (
-    <div className="p-8 bg-gradient-to-b from-blue-50 to-white min-h-screen">
-      <h1 className="text-3xl font-bold text-blue-800 text-center mb-8">
-        Project Management
-      </h1>
+    <div className="p-6 bg-white min-h-screen">
+      <h1 className="text-4xl font-bold text-blue-600 mb-6">Project Management</h1>
 
-      {/* Project Form */}
-      <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-200 mb-10">
-        <h2 className="text-xl font-semibold text-blue-700 mb-6">
-          {isEditing ? 'Edit Project' : 'Add New Project'}
+      {/* Project Creation/Edit Form */}
+      <form onSubmit={handleSubmit} className="mb-8 bg-gray-50 p-6 rounded-lg shadow-md">
+        <h2 className="text-2xl font-semibold text-blue-700 mb-4">
+          {editingId ? 'Edit Project' : 'Create New Project'}
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div>
-            <label className="block text-gray-600 font-medium mb-1">Title</label>
+            <label className="block text-gray-700 mb-2">Project Title</label>
             <input
               type="text"
               name="title"
-              value={newProject.title}
+              value={formData.title}
               onChange={handleInputChange}
-              className="w-full p-3 border rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-600"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
             />
           </div>
+
           <div>
-            <label className="block text-gray-600 font-medium mb-1">Description</label>
-            <textarea
-              name="description"
-              value={newProject.description}
+            <label className="block text-gray-700 mb-2">Domain</label>
+            <select
+              name="domain"
+              value={formData.domain}
               onChange={handleInputChange}
-              className="w-full p-3 border rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-600"
-              rows="3"
-            ></textarea>
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            >
+              <option value="">Select Domain</option>
+              {domains.map(domain => (
+                <option key={domain} value={domain}>{domain}</option>
+              ))}
+            </select>
           </div>
+
           <div>
-            <label className="block text-gray-600 font-medium mb-1">Keywords</label>
+            <label className="block text-gray-700 mb-2">Supervisor</label>
+            <input
+              type="text"
+              name="supervisor"
+              value={formData.supervisor}
+              onChange={handleInputChange}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-700 mb-2">Max Team Size</label>
+            <input
+              type="number"
+              name="maxTeamSize"
+              value={formData.maxTeamSize}
+              onChange={handleInputChange}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+              min="1"
+            />
+          </div>
+
+          <div className="md:col-span-2">
+            <label className="block text-gray-700 mb-2">Keywords (comma-separated)</label>
             <input
               type="text"
               name="keywords"
-              value={newProject.keywords}
+              value={formData.keywords}
               onChange={handleInputChange}
-              placeholder="e.g., React, JavaScript, Frontend"
-              className="w-full p-3 border rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-600"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="AI, Machine Learning, Python"
+              required
             />
           </div>
-          <div>
-            <label className="block text-gray-600 font-medium mb-1">Status</label>
-            <select
-              name="status"
-              value={newProject.status}
+
+          <div className="md:col-span-2">
+            <label className="block text-gray-700 mb-2">Description</label>
+            <textarea
+              name="description"
+              value={formData.description}
               onChange={handleInputChange}
-              className="w-full p-3 border rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-600"
-            >
-              <option value="Open">Open</option>
-              <option value="In Progress">In Progress</option>
-              <option value="Completed">Completed</option>
-            </select>
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              rows="4"
+              required
+            />
           </div>
         </div>
-        <div className="mt-6 flex gap-4">
-          {isEditing ? (
-            <>
-              <button
-                onClick={handleSaveEdit}
-                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-              >
-                Save Changes
-              </button>
-              <button
-                onClick={() => {
-                  setIsEditing(false);
-                  setNewProject({ title: '', description: '', keywords: '', status: 'Open' });
-                }}
-                className="px-6 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500"
-              >
-                Cancel
-              </button>
-            </>
-          ) : (
-            <button
-              onClick={handleAddProject}
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-            >
-              Add Project
-            </button>
-          )}
-        </div>
-      </div>
+
+        <button
+          type="submit"
+          className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none transition"
+        >
+          {editingId ? 'Update Project' : 'Create Project'}
+        </button>
+      </form>
 
       {/* Project List */}
-      <div className="space-y-6">
-        {projects.map((project) => (
-          <div
-            key={project.id}
-            className="bg-white p-5 rounded-lg shadow-md border border-gray-200"
-          >
-            <h3 className="text-lg font-semibold text-blue-700">{project.title}</h3>
-            <p className="text-gray-600 mt-2">{project.description}</p>
-            <p className="text-sm text-gray-500 mt-1">
-              Keywords: <span className="font-medium">{project.keywords.join(', ')}</span>
-            </p>
-            <p
-              className={`text-sm mt-1 font-medium ${
-                project.status === 'Open'
-                  ? 'text-green-600'
-                  : project.status === 'In Progress'
-                  ? 'text-blue-600'
-                  : 'text-gray-500'
-              }`}
-            >
-              Status: {project.status}
-            </p>
-            <div className="mt-4 flex gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projects.map(project => (
+          <div key={project.id} className="p-6 bg-white rounded-lg shadow-lg">
+            <h3 className="text-2xl font-semibold text-blue-700 mb-3">{project.title}</h3>
+            <p className="text-gray-700 mb-4">{project.description}</p>
+            <div className="text-sm text-gray-500 mb-4">
+              <p><strong>Domain:</strong> {project.domain}</p>
+              <p><strong>Supervisor:</strong> {project.supervisor}</p>
+              <p><strong>Max Team Size:</strong> {project.maxTeamSize}</p>
+            </div>
+            <div className="flex flex-wrap gap-2 mb-4">
+              {project.keywords.map((keyword, index) => (
+                <span key={index} className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-medium">
+                  {keyword}
+                </span>
+              ))}
+            </div>
+            <div className="flex space-x-2">
               <button
-                onClick={() => handleEditProject(project.id)}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                onClick={() => handleEdit(project)}
+                className="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 focus:outline-none transition flex-1"
               >
                 Edit
               </button>
               <button
-                onClick={() => handleDeleteProject(project.id)}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                onClick={() => handleDelete(project.id)}
+                className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none transition flex-1"
               >
                 Delete
               </button>
             </div>
           </div>
         ))}
-        {projects.length === 0 && (
-          <p className="text-center text-gray-500 mt-10">No projects available. Add some!</p>
-        )}
       </div>
     </div>
   );
 };
 
-export default ProjectManagement;
+export default TeacherProjectManagement;

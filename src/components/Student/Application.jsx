@@ -2,9 +2,32 @@ import React, { useState } from 'react';
 
 const Applications = ({ applications = [] }) => {
   const [showTeamModal, setShowTeamModal] = useState(false);
+  const [students] = useState([
+    { id: 1, name: 'Alice Johnson', skills: 'React, JavaScript' },
+    { id: 2, name: 'Bob Smith', skills: 'Python, Data Analysis' },
+    { id: 3, name: 'Charlie Brown', skills: 'Machine Learning, AI' },
+  ]);
+  const [selectedStudents, setSelectedStudents] = useState([]);
+  const [teams, setTeams] = useState([]);
 
   const toggleTeamModal = () => {
     setShowTeamModal(!showTeamModal);
+  };
+
+  const handleStudentSelect = (student) => {
+    if (selectedStudents.includes(student)) {
+      setSelectedStudents(selectedStudents.filter((s) => s !== student));
+    } else {
+      setSelectedStudents([...selectedStudents, student]);
+    }
+  };
+
+  const formTeam = () => {
+    if (selectedStudents.length > 0) {
+      setTeams([...teams, selectedStudents]);
+      setSelectedStudents([]);
+      setShowTeamModal(false);
+    }
   };
 
   return (
@@ -50,22 +73,52 @@ const Applications = ({ applications = [] }) => {
         </div>
       )}
 
+      {teams.length > 0 && (
+        <div className="mt-8">
+          <h3 className="text-2xl font-bold text-blue-600 mb-4">Formed Teams</h3>
+          {teams.map((team, index) => (
+            <div
+              key={index}
+              className="p-4 bg-gray-100 rounded-lg shadow-md mb-4 border border-gray-300"
+            >
+              <h4 className="text-lg font-bold text-blue-800 mb-2">Team {index + 1}</h4>
+              <ul className="list-disc list-inside text-gray-700">
+                {team.map((student) => (
+                  <li key={student.id}>{student.name} ({student.skills})</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
+
       {showTeamModal && (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
           <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
             <h3 className="text-xl font-bold text-gray-800 mb-4">Form a Team</h3>
-            <p className="text-gray-600 mb-4">Search for students to invite to your team:</p>
+            <p className="text-gray-600 mb-4">Select students for your team:</p>
 
-            <input
-              type="text"
-              placeholder="Search by name, email, or skills"
-              className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            <div className="space-y-2">
+              {students.map((student) => (
+                <div key={student.id} className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={selectedStudents.includes(student)}
+                    onChange={() => handleStudentSelect(student)}
+                    className="mr-2"
+                  />
+                  <label className="text-gray-700">
+                    {student.name} ({student.skills})
+                  </label>
+                </div>
+              ))}
+            </div>
 
             <button
-              className="w-full mb-2 px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onClick={formTeam}
+              className="w-full mt-4 mb-2 px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              Send Invitation
+              Form Team
             </button>
 
             <button
